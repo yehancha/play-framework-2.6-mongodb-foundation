@@ -16,8 +16,11 @@ public class BeerController extends Controller {
         return beer.insert() ? ok(Json.toJson(beer)) : badRequest();
     }
 
-    public Result remove() {
-        Beer beer = Json.fromJson(request().body().asJson(), Beer.class);
-        return beer.remove() ? ok() : notFound();
+    public Result remove(String id) {
+        Beer beer = Beer.get(id);
+
+        if (beer == null) return notFound();
+
+        return beer.remove() ? ok(Json.toJson(beer)) : internalServerError();
     }
 }
