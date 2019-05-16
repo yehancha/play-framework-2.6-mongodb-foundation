@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Exit if one command  fails
+set -e 
+
+# Stos current running and all proceeding commands in the script if CTRL+C
+trap "exit" INT
+
 # First, we build locally and upload.
 
 sbt dist
