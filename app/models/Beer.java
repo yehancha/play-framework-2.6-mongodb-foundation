@@ -7,6 +7,8 @@ import org.jongo.MongoCursor;
 import play.api.Play;
 import uk.co.panaxiom.playjongo.PlayJongo;
 
+import java.util.UUID;
+
 public class Beer {
     public static PlayJongo jongo = Play.current().injector().instanceOf(PlayJongo.class);
 
@@ -15,10 +17,11 @@ public class Beer {
     }
 
     @JsonProperty("_id")
-    public ObjectId id;
+    public String id;
     public String name;
 
     public boolean insert() {
+        id = UUID.randomUUID().toString();
         return beers().save(this).getN() > 0;
     }
 
