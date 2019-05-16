@@ -4,6 +4,7 @@
 
 # An example and health controller showing a sample home page
 GET     /                           controllers.HomeController.index
+OPTIONS /*path                      controllers.HealthController.index(path: String)
 
 # Beer controller
 GET     /api/beers                      controllers.BeerController.getAll
