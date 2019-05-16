@@ -8,7 +8,9 @@ OPTIONS /*path                      controllers.HealthController.index(path: Str
 
 # Beer controller
 GET     /api/beers                      controllers.BeerController.getAll
++nocsrf
 POST    /api/beers                      controllers.BeerController.add
++nocsrf
 DELETE  /api/beers/:id                  controllers.BeerController.remove(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
