@@ -1,13 +1,10 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 import play.api.Play;
 import uk.co.panaxiom.playjongo.PlayJongo;
-
-import java.util.UUID;
 
 public class Beer {
     public static PlayJongo jongo = Play.current().injector().instanceOf(PlayJongo.class);
@@ -16,17 +13,16 @@ public class Beer {
         return jongo.getCollection("beers");
     }
 
-    @JsonProperty("_id")
-    public String id;
+    @MongoObjectId
+    public String _id;
     public String name;
 
     public boolean insert() {
-        id = UUID.randomUUID().toString();
         return beers().save(this).getN() > 0;
     }
 
     public boolean remove() {
-        return beers().remove(this.id).getN() > 0;
+        return beers().remove(this._id).getN() > 0;
     }
 
     public static MongoCursor<Beer> findAll() {
